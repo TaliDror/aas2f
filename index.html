@@ -634,7 +634,7 @@
 
   <script>
     const examples = [];
-    const skip = [10, 18, 19, 22, 23, 27, 28, 39, 44, 46, 51];
+    const skip = [10, 14, 18, 19, 21, 22, 23, 27, 28, 34, 39, 40, 44, 46, 51];
     let displayIndex = 1;
 
     for (let i = 5; i <= 55; i++) {
@@ -693,7 +693,7 @@
           <div class="example-head">
             <div>
               <h3 class="example-title">${example.title}</h3>
-              <div class="example-meta">${example.id}${example.note ? ' · ' + example.note : ''}</div>
+              <div class="example-meta">${example.note ? example.note : ''}</div>
             </div>
             <div class="badge">3 audio-image pairs</div>
           </div>
