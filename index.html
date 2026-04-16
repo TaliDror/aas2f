@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AAS2F Project Page</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --panel: #121933;
+      --panel-2: #1a2447;
+      --text: #eef2ff;
+      --muted: #b8c1e0;
+      --accent: #8ab4ff;
+      --border: rgba(255,255,255,0.08);
+      --shadow: 0 10px 30px rgba(0,0,0,0.25);
+      --radius: 18px;
+      --maxw: 1200px;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: linear-gradient(180deg, #0b1020 0%, #0d1430 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container {
+      width: min(var(--maxw), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    header.hero {
+      padding: 64px 0 36px;
+    }
+
+    .hero-card {
+      background: rgba(18,25,51,0.8);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 32px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(8px);
+    }
+
+    h1 {
+      font-size: clamp(2rem, 4vw, 3.3rem);
+      line-height: 1.1;
+      margin: 0 0 16px;
+    }
+
+    .subtitle {
+      font-size: 1.08rem;
+      color: var(--muted);
+      max-width: 900px;
+      margin-bottom: 20px;
+    }
+
+    .authors, .links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+      color: var(--muted);
+    }
+
+    .pill {
+      background: var(--panel-2);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 8px 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text);
+      font-size: 0.95rem;
+    }
+
+    section {
+      padding: 18px 0 34px;
+    }
+
+    .section-title {
+      font-size: 1.6rem;
+      margin: 0 0 12px;
+    }
+
+    .section-text {
+      color: var(--muted);
+      max-width: 900px;
+      margin: 0 0 18px;
+    }
+
+    .notice {
+      background: rgba(138,180,255,0.08);
+      border: 1px solid rgba(138,180,255,0.18);
+      color: var(--text);
+      padding: 14px 16px;
+      border-radius: 14px;
+      margin: 12px 0 0;
+    }
+
+    .examples-toolbar {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .search, .select {
+      width: 100%;
+      background: var(--panel);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px 14px;
+      font-size: 0.98rem;
+      outline: none;
+    }
+
+    .examples-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 22px;
+    }
+
+    .example-card {
+      background: rgba(18,25,51,0.82);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .example-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--border);
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .example-title {
+      margin: 0;
+      font-size: 1.15rem;
+    }
+
+    .example-meta {
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .example-body {
+      padding: 20px;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 20px;
+    }
+
+    .gt-panel, .results-panel {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px;
+    }
+
+    .panel-label {
+      margin: 0 0 10px;
+      font-size: 0.95rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .gt-image {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      display: block;
+      background: #0e1222;
+    }
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .sample-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px;
+    }
+
+    .sample-card img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #0e1222;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .sample-title {
+      font-size: 0.95rem;
+      margin: 0 0 8px;
+    }
+
+    audio {
+      width: 100%;
+      margin-top: 6px;
+      filter: invert(1) hue-rotate(180deg);
+      opacity: 0.92;
+    }
+
+    footer {
+      padding: 24px 0 50px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    code.inline {
+      background: rgba(255,255,255,0.06);
+      padding: 2px 8px;
+      border-radius: 8px;
+    }
+
+    @media (max-width: 900px) {
+      .example-body {
+        grid-template-columns: 1fr;
+      }
+
+      .results-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .examples-toolbar {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="container">
+      <div class="hero-card">
+        <h1>Ambiguity-Aware Speech-to-Face Synthesis</h1>
+        <p class="subtitle">
+          Project page for presenting qualitative examples of voice-conditioned face synthesis.
+          Each identity includes one ground-truth image and three audio prompts with their corresponding generated images.
+        </p>
+
+        <div class="authors">
+          <span class="pill">Author 1</span>
+          <span class="pill">Author 2</span>
+          <span class="pill">Author 3</span>
+        </div>
+
+        <div class="links">
+          <a class="pill" href="#" target="_blank" rel="noreferrer">Paper</a>
+          <a class="pill" href="#" target="_blank" rel="noreferrer">arXiv</a>
+          <a class="pill" href="#examples">Examples</a>
+          <a class="pill" href="#citation">Citation</a>
+          <a class="pill" href="#" target="_blank" rel="noreferrer">Code</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <div class="container">
+        <h2 class="section-title">Overview</h2>
+        <p class="section-text">
+          Use this page to showcase your paper, explain the idea in a few sentences, and present many qualitative examples.
+          The layout below is designed for 20+ identities and stays readable on both desktop and mobile.
+        </p>
+        <div class="notice">
+          Tip: Keep all images square and compressed, and keep all audio clips short so the page loads quickly on GitHub Pages.
+        </div>
+      </div>
+    </section>
+
+    <section id="examples">
+      <div class="container">
+        <h2 class="section-title">Qualitative Examples</h2>
+        <p class="section-text">
+          Search by identity name or tag. You can also filter by subset if you later decide to split examples into groups such as test speakers, ablations, or comparison cases.
+        </p>
+
+        <div class="examples-toolbar">
+          <input id="searchInput" class="search" type="text" placeholder="Search identity, tag, or note..." />
+          <select id="groupFilter" class="select">
+            <option value="all">All groups</option>
+          </select>
+        </div>
+
+        <div id="examplesGrid" class="examples-grid"></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2 class="section-title">Project Structure</h2>
+        <p class="section-text">Recommended GitHub repository layout:</p>
+        <div class="notice">
+          <div><code class="inline">index.html</code></div>
+          <div><code class="inline">assets/images/identity_01/gt.jpg</code></div>
+          <div><code class="inline">assets/images/identity_01/gen_1.jpg</code></div>
+          <div><code class="inline">assets/images/identity_01/gen_2.jpg</code></div>
+          <div><code class="inline">assets/images/identity_01/gen_3.jpg</code></div>
+          <div><code class="inline">assets/audio/identity_01/audio_1.wav</code></div>
+          <div><code class="inline">assets/audio/identity_01/audio_2.wav</code></div>
+          <div><code class="inline">assets/audio/identity_01/audio_3.wav</code></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="citation">
+      <div class="container">
+        <h2 class="section-title">Citation</h2>
+        <div class="notice">
+<pre style="margin:0; white-space:pre-wrap; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--text);">@article{aas2f2025,
+  title   = {Ambiguity-Aware Speech-to-Face Synthesis with Speaker-Conditioned Diffusion Models},
+  author  = {Author Names},
+  journal = {arXiv / Conference},
+  year    = {2025}
+}</pre>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      Built for GitHub Pages. Replace placeholder media paths and text with your real paper assets.
+    </div>
+  </footer>
+
+  <script>
+    const examples = [
+      {
+        id: "identity_01",
+        title: "Identity 01",
+        group: "main",
+        note: "Example note or speaker info",
+        gtImage: "assets/images/identity_01/gt.jpg",
+        samples: [
+          {
+            title: "Audio 1",
+            audio: "assets/audio/identity_01/audio_1.wav",
+            image: "assets/images/identity_01/gen_1.jpg"
+          },
+          {
+            title: "Audio 2",
+            audio: "assets/audio/identity_01/audio_2.wav",
+            image: "assets/images/identity_01/gen_2.jpg"
+          },
+          {
+            title: "Audio 3",
+            audio: "assets/audio/identity_01/audio_3.wav",
+            image: "assets/images/identity_01/gen_3.jpg"
+          }
+        ]
+      },
+      {
+        id: "identity_02",
+        title: "Identity 02",
+        group: "main",
+        note: "Add as many identities as you want",
+        gtImage: "assets/images/identity_02/gt.jpg",
+        samples: [
+          {
+            title: "Audio 1",
+            audio: "assets/audio/identity_02/audio_1.wav",
+            image: "assets/images/identity_02/gen_1.jpg"
+          },
+          {
+            title: "Audio 2",
+            audio: "assets/audio/identity_02/audio_2.wav",
+            image: "assets/images/identity_02/gen_2.jpg"
+          },
+          {
+            title: "Audio 3",
+            audio: "assets/audio/identity_02/audio_3.wav",
+            image: "assets/images/identity_02/gen_3.jpg"
+          }
+        ]
+      }
+    ];
+
+    const grid = document.getElementById('examplesGrid');
+    const searchInput = document.getElementById('searchInput');
+    const groupFilter = document.getElementById('groupFilter');
+
+    function initializeGroups() {
+      const groups = [...new Set(examples.map(x => x.group).filter(Boolean))];
+      groups.forEach(group => {
+        const option = document.createElement('option');
+        option.value = group;
+        option.textContent = group.charAt(0).toUpperCase() + group.slice(1);
+        groupFilter.appendChild(option);
+      });
+    }
+
+    function renderExamples() {
+      const query = searchInput.value.trim().toLowerCase();
+      const selectedGroup = groupFilter.value;
+
+      const filtered = examples.filter(example => {
+        const matchesGroup = selectedGroup === 'all' || example.group === selectedGroup;
+        const haystack = [example.id, example.title, example.group, example.note].join(' ').toLowerCase();
+        const matchesSearch = !query || haystack.includes(query);
+        return matchesGroup && matchesSearch;
+      });
+
+      if (!filtered.length) {
+        grid.innerHTML = '<div class="notice">No examples match your filter.</div>';
+        return;
+      }
+
+      grid.innerHTML = filtered.map(example => `
+        <article class="example-card">
+          <div class="example-head">
+            <div>
+              <h3 class="example-title">${example.title}</h3>
+              <div class="example-meta">${example.id} · ${example.group}${example.note ? ' · ' + example.note : ''}</div>
+            </div>
+            <span class="pill">3 audio-image pairs</span>
+          </div>
+
+          <div class="example-body">
+            <div class="gt-panel">
+              <p class="panel-label">Ground Truth Image</p>
+              <img class="gt-image" src="${example.gtImage}" alt="Ground truth image for ${example.title}" loading="lazy" />
+            </div>
+
+            <div class="results-panel">
+              <p class="panel-label">Generated Images Conditioned on Audio</p>
+              <div class="results-grid">
+                ${example.samples.map(sample => `
+                  <div class="sample-card">
+                    <img src="${sample.image}" alt="${sample.title} generated image for ${example.title}" loading="lazy" />
+                    <p class="sample-title">${sample.title}</p>
+                    <audio controls preload="none">
+                      <source src="${sample.audio}" type="audio/wav" />
+                      Your browser does not support audio playback.
+                    </audio>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    initializeGroups();
+    renderExamples();
+    searchInput.addEventListener('input', renderExamples);
+    groupFilter.addEventListener('change', renderExamples);
+  </script>
+</body>
+</html>
