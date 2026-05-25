@@ -3,984 +3,449 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AAS2F — Project Page</title>
-  <meta name="description" content="Project page for Ambiguity-Aware Speech-to-Face Synthesis with qualitative audio-image examples." />
+  <title>AAS2F — Ambiguity-Aware Speech-to-Face Synthesis</title>
+  <meta name="description" content="Project page for Ambiguity-Aware Speech-to-Face Synthesis with Speaker-Conditioned Diffusion Models." />
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
 
   <style>
-    :root {
-      --bg: #f6f8fc;
-      --surface: #ffffff;
-      --surface-2: #f1f4fb;
-      --text: #172033;
-      --muted: #5f6b85;
-      --line: #dbe3f0;
-      --primary: #315efb;
-      --primary-dark: #2448c8;
-      --shadow: 0 14px 40px rgba(32, 52, 100, 0.10);
-      --radius-xl: 24px;
-      --radius-lg: 18px;
-      --radius-md: 14px;
-      --max-width: 1180px;
-    }
+    body { font-family: 'Noto Sans', sans-serif; }
+    .title, .publication-title { font-family: 'Google Sans', sans-serif; }
 
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-
-    body {
-      margin: 0;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background:
-        radial-gradient(circle at top left, rgba(49,94,251,0.08), transparent 28%),
-        linear-gradient(180deg, #f8faff 0%, #f4f7fc 100%);
-      color: var(--text);
-      line-height: 1.65;
-    }
-
-    img { max-width: 100%; display: block; }
-    a { color: inherit; text-decoration: none; }
-
-    .container {
-      width: min(var(--max-width), calc(100% - 32px));
-      margin: 0 auto;
-    }
-
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      backdrop-filter: blur(12px);
-      background: rgba(246,248,252,0.85);
-      border-bottom: 1px solid rgba(219, 227, 240, 0.8);
-    }
-
-    .nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      min-height: 72px;
-    }
-
-    .brand {
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      font-size: 1.05rem;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .nav-link {
-      padding: 9px 14px;
-      border-radius: 999px;
-      color: var(--muted);
-      font-weight: 600;
-      font-size: 0.95rem;
-    }
-
-    .nav-link:hover {
-      background: var(--surface);
-      color: var(--text);
-    }
-
-    .hero {
-      padding: 56px 0 26px;
-    }
-
-    .hero-card {
-      background: linear-gradient(135deg, rgba(255,255,255,0.96), rgba(245,248,255,0.96));
-      border: 1px solid rgba(219, 227, 240, 0.9);
-      border-radius: 30px;
-      box-shadow: var(--shadow);
-      padding: clamp(24px, 4vw, 42px);
-    }
-
-    .hero-top {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 8px 14px;
-      border-radius: 999px;
-      background: rgba(49,94,251,0.08);
-      color: var(--primary-dark);
-      font-weight: 700;
-      font-size: 0.92rem;
-      margin-bottom: 18px;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: clamp(2.15rem, 4.7vw, 4rem);
-      line-height: 1.05;
-      letter-spacing: -0.04em;
-      max-width: 920px;
-    }
-
-    .hero-subtitle {
-      margin: 18px 0 0;
-      color: var(--muted);
-      font-size: 1.08rem;
-      max-width: 900px;
-    }
-
-    .authors {
-      margin-top: 22px;
-      color: var(--muted);
-      font-size: 1rem;
-    }
-
-    .button-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 26px;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 12px 18px;
-      border-radius: 999px;
-      font-weight: 700;
-      border: 1px solid transparent;
-      transition: 0.18s ease;
-      cursor: pointer;
-    }
-
-    .btn-primary {
-      background: var(--primary);
-      color: white;
-      box-shadow: 0 10px 25px rgba(49,94,251,0.25);
-    }
-
-    .btn-primary:hover {
-      background: var(--primary-dark);
-    }
-
-    .btn-secondary {
-      background: white;
-      color: var(--text);
-      border-color: var(--line);
-    }
-
-    .btn-secondary:hover {
-      background: var(--surface-2);
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 18px;
-      margin-top: 28px;
-    }
-
-    .mini-card {
-      background: white;
-      border: 1px solid var(--line);
-      border-radius: var(--radius-xl);
-      padding: 18px;
-    }
-
-    .mini-title {
-      margin: 0 0 8px;
-      font-size: 0.95rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--muted);
-    }
-
-    .mini-value {
-      font-size: 1.05rem;
-      font-weight: 700;
-      margin: 0;
-    }
-
-    section {
-      padding: 26px 0;
-    }
-
-    .section-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: end;
-      gap: 18px;
-      margin-bottom: 18px;
-      flex-wrap: wrap;
-    }
-
-    .eyebrow {
-      display: inline-block;
-      color: var(--primary-dark);
-      background: rgba(49,94,251,0.08);
-      border-radius: 999px;
-      padding: 6px 12px;
-      font-size: 0.84rem;
-      font-weight: 700;
-      margin-bottom: 10px;
-    }
-
-    h2 {
-      margin: 0;
-      font-size: clamp(1.55rem, 2.3vw, 2.2rem);
-      line-height: 1.15;
-      letter-spacing: -0.03em;
-    }
-
-    .section-text {
-      margin: 10px 0 0;
-      max-width: 830px;
-      color: var(--muted);
-    }
-
-    .overview-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 16px;
-    }
-
-    .info-card {
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: var(--radius-xl);
-      padding: 22px;
-      box-shadow: var(--shadow);
-    }
-
-    .info-card h3 {
-      margin: 0 0 8px;
-      font-size: 1.08rem;
-    }
-
-    .info-card p {
-      margin: 0;
-      color: var(--muted);
-    }
-
-    .figure-card {
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: 28px;
-      box-shadow: var(--shadow);
-      padding: 20px;
-    }
-
-    .figure-frame {
-      aspect-ratio: 16 / 8.5;
-      border-radius: 20px;
-      border: 1px dashed #bcc8df;
-      background:
-        linear-gradient(135deg, rgba(49,94,251,0.04), rgba(49,94,251,0.10)),
-        repeating-linear-gradient(135deg, rgba(255,255,255,0.45), rgba(255,255,255,0.45) 14px, rgba(241,244,251,0.65) 14px, rgba(241,244,251,0.65) 28px);
-      display: grid;
-      place-items: center;
-      color: var(--muted);
-      font-weight: 700;
-      text-align: center;
-      padding: 18px;
-    }
-
-    .figure-caption {
-      margin: 12px 0 0;
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-
-    .demo-card {
-      display: grid;
-      grid-template-columns: 0.85fr 1.15fr;
-      gap: 20px;
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: 28px;
-      box-shadow: var(--shadow);
-      padding: 22px;
-    }
-
-    .demo-actions {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .demo-status {
-      color: var(--muted);
-      margin: 14px 0;
-    }
-
-    #recordedAudio {
-      width: 100%;
-      display: none;
-      margin-top: 12px;
-    }
-
-    .generated-preview {
-      aspect-ratio: 1 / 1;
-      border-radius: 22px;
-      border: 1px dashed #bcc8df;
-      background:
-        linear-gradient(135deg, rgba(49,94,251,0.04), rgba(49,94,251,0.10)),
-        repeating-linear-gradient(135deg, rgba(255,255,255,0.45), rgba(255,255,255,0.45) 14px, rgba(241,244,251,0.65) 14px, rgba(241,244,251,0.65) 28px);
-      display: grid;
-      place-items: center;
-      text-align: center;
-      color: var(--muted);
-      font-weight: 700;
-      padding: 18px;
-      overflow: hidden;
-    }
-
-    .generated-preview img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 20px;
-    }
-
-    .toolbar {
-      display: grid;
-      grid-template-columns: 1.1fr 0.6fr;
-      gap: 12px;
-      margin-bottom: 18px;
-    }
-
-    .input, .select {
-      width: 100%;
-      border: 1px solid var(--line);
-      background: white;
-      color: var(--text);
-      border-radius: 16px;
-      padding: 14px 16px;
-      font: inherit;
-      outline: none;
-    }
-
-    .examples-grid {
-      display: grid;
-      gap: 22px;
-    }
+    /* ── Examples grid ──────────────────────────────── */
+    .examples-grid { display: grid; gap: 24px; }
 
     .example-card {
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: 28px;
-      box-shadow: var(--shadow);
+      background: white;
+      border: 1px solid #dbdbdb;
+      border-radius: 16px;
       overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     }
 
     .example-head {
-      padding: 22px 24px;
-      border-bottom: 1px solid var(--line);
+      padding: 16px 20px;
+      border-bottom: 1px solid #dbdbdb;
       display: flex;
       justify-content: space-between;
-      gap: 14px;
-      flex-wrap: wrap;
       align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
     }
 
-    .example-title {
+    .example-card-title {
       margin: 0;
-      font-size: 1.16rem;
-      letter-spacing: -0.02em;
+      font-size: 1rem;
+      font-weight: 700;
+      font-family: 'Google Sans', sans-serif;
     }
 
-    .badge {
+    .ex-badge {
       display: inline-flex;
       align-items: center;
-      justify-content: center;
-      white-space: nowrap;
-      padding: 8px 12px;
+      padding: 3px 10px;
       border-radius: 999px;
-      background: rgba(49,94,251,0.08);
-      color: var(--primary-dark);
-      font-size: 0.88rem;
+      background: rgba(72,95,199,0.1);
+      color: #485fc7;
+      font-size: 0.8rem;
       font-weight: 700;
     }
 
     .example-body {
       display: grid;
-      grid-template-columns: 290px 1fr;
-      gap: 20px;
-      padding: 22px;
-    }
-
-    .panel {
-      border: 1px solid var(--line);
-      border-radius: 22px;
+      grid-template-columns: 240px 1fr;
+      gap: 16px;
       padding: 16px;
-      background: linear-gradient(180deg, #ffffff 0%, #fbfcff 100%);
     }
 
-    .panel-label {
-      margin: 0 0 12px;
-      color: var(--muted);
+    .ex-panel {
+      border: 1px solid #ebebeb;
+      border-radius: 12px;
+      padding: 12px;
+      background: #fafafa;
+    }
+
+    .ex-panel-label {
+      margin: 0 0 8px;
+      color: #888;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
-      font-size: 0.82rem;
+      letter-spacing: 0.07em;
+      font-size: 0.72rem;
       font-weight: 800;
     }
 
-    .gt-image,
-    .sample-image {
+    .gt-image, .sample-image {
       width: 100%;
       aspect-ratio: 1 / 1;
       object-fit: cover;
-      border-radius: 18px;
-      border: 1px solid var(--line);
-      background: linear-gradient(135deg, #eff3fa, #f8faff);
+      border-radius: 10px;
+      border: 1px solid #e0e0e0;
+      background: #f0f0f0;
     }
 
     .results-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 16px;
+      gap: 10px;
     }
 
     .sample-card {
-      border: 1px solid var(--line);
+      border: 1px solid #ebebeb;
       background: white;
-      border-radius: 20px;
-      padding: 12px;
+      border-radius: 10px;
+      padding: 9px;
     }
 
-    .sample-title {
-      margin: 10px 0 8px;
-      font-size: 0.98rem;
+    .sample-card-title {
+      margin: 7px 0 5px;
+      font-size: 0.88rem;
       font-weight: 700;
     }
 
-    audio {
+    audio { width: 100%; border-radius: 999px; }
+
+    /* ── Toolbar ─────────────────────────────────────── */
+    .examples-toolbar {
+      display: grid;
+      grid-template-columns: 1fr 0.4fr;
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+
+    .examples-toolbar input,
+    .examples-toolbar select {
       width: 100%;
-      border-radius: 999px;
+      border: 1px solid #dbdbdb;
+      border-radius: 8px;
+      padding: 9px 13px;
+      font: inherit;
+      font-size: 0.95rem;
+      outline: none;
+      background: white;
+      color: #363636;
+      transition: border-color 0.15s;
     }
 
-    .citation-box {
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: 24px;
-      padding: 18px;
-      box-shadow: var(--shadow);
-    }
+    .examples-toolbar input:focus,
+    .examples-toolbar select:focus { border-color: #485fc7; }
 
-    .citation-box pre {
-      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      font-size: 0.94rem;
-      margin: 0;
-      white-space: pre-wrap;
-    }
-
-    .footer {
-      padding: 28px 0 46px;
-      color: var(--muted);
-      text-align: center;
+    /* ── Method figure placeholder ────────────────────── */
+    .method-placeholder {
+      aspect-ratio: 16 / 7;
+      background: linear-gradient(135deg, #f5f8ff, #eaefff);
+      border: 2px dashed #b5c1e8;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #7a8fc5;
+      font-weight: 600;
       font-size: 0.95rem;
     }
 
-    @media (max-width: 980px) {
-      .hero-grid,
-      .overview-grid,
-      .toolbar,
-      .example-body,
-      .results-grid,
-      .demo-card {
-        grid-template-columns: 1fr;
-      }
+    /* ── HF Demo box ──────────────────────────────────── */
+    .hf-demo-box {
+      background: linear-gradient(135deg, #fff8ef, #fff3e0);
+      border: 2px solid #ffb347;
+      border-radius: 20px;
+      padding: 40px 28px;
+      text-align: center;
     }
 
-    @media (max-width: 700px) {
-      .nav {
-        min-height: auto;
-        padding: 12px 0;
-        align-items: flex-start;
-        flex-direction: column;
-      }
+    .hf-demo-desc {
+      color: #555;
+      max-width: 580px;
+      margin: 0 auto 1.8rem;
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
 
-      .hero {
-        padding-top: 28px;
+    .hf-iframe-wrap {
+      margin-top: 2rem;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid #e8c870;
+    }
+
+    /* ── Responsive ───────────────────────────────────── */
+    @media (max-width: 768px) {
+      .example-body, .results-grid, .examples-toolbar {
+        grid-template-columns: 1fr;
       }
     }
   </style>
 </head>
-
 <body>
 
-<header class="site-header">
-  <div class="container nav">
-    <a class="brand" href="#top">AAS2F</a>
-
-    <nav class="nav-links">
-      <a class="nav-link" href="#overview">Overview</a>
-      <a class="nav-link" href="#method">Method</a>
-      <a class="nav-link" href="#demo">Demo</a>
-      <a class="nav-link" href="#examples">Examples</a>
-      <a class="nav-link" href="#citation">Citation</a>
-    </nav>
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
   </div>
-</header>
-
-<main id="top">
-
-  <section class="hero">
-    <div class="container">
-      <div class="hero-card">
-
-        <div class="hero-top">Project Page</div>
-
-        <h1>
-          Ambiguity-Aware Speech-to-Face Synthesis
-          with Speaker-Conditioned Diffusion Models
-        </h1>
-
-        <p class="hero-subtitle">
-          We present an ambiguity-aware speech-to-face synthesis framework
-          that models the one-to-many nature of voice-to-face correspondence.
-        </p>
-
-        <div class="authors">
-          <strong>Author One</strong>, Author Two, Author Three
-        </div>
-
-        <div class="button-row">
-          <a class="btn btn-primary" href="#demo">Try Demo</a>
-          <a class="btn btn-secondary" href="#examples">View Examples</a>
-        </div>
-
-      </div>
+  <div id="navbarMenu" class="navbar-menu">
+    <div class="navbar-end">
+      <a class="navbar-item" href="#abstract">Abstract</a>
+      <a class="navbar-item" href="#method">Method</a>
+      <a class="navbar-item" href="#demo">Demo</a>
+      <a class="navbar-item" href="#examples">Results</a>
     </div>
-  </section>
+  </div>
+</nav>
 
-  <section id="overview">
-    <div class="container">
 
-      <div class="section-header">
-        <div>
-          <span class="eyebrow">Overview</span>
-          <h2>Ambiguity-aware speech-to-face synthesis</h2>
+<!-- ═══ Hero ══════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
 
-          <p class="section-text">
-            This project page presents qualitative results with one reference
-            face and multiple audio-conditioned generations.
-          </p>
-        </div>
-      </div>
+          <h1 class="title is-1 publication-title">
+            Ambiguity-Aware Speech-to-Face Synthesis<br>
+            with Speaker-Conditioned Diffusion Models
+          </h1>
 
-      <div class="overview-grid">
+          <div class="column has-text-centered">
+            <div class="publication-links">
 
-        <article class="info-card">
-          <h3>Ambiguity-aware alignment</h3>
-          <p>
-            Models the one-to-many nature of voice-to-face correspondence.
-          </p>
-        </article>
+              <span class="link-block">
+                <a href="#"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="ai ai-arxiv"></i></span>
+                  <span>arXiv</span>
+                </a>
+              </span>
 
-        <article class="info-card">
-          <h3>Speaker-conditioned generation</h3>
-          <p>
-            Speaker embeddings condition a pretrained face generator.
-          </p>
-        </article>
+              <span class="link-block">
+                <a href="#"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fab fa-github"></i></span>
+                  <span>Code</span>
+                </a>
+              </span>
 
-        <article class="info-card">
-          <h3>Qualitative evaluation</h3>
-          <p>
-            Multiple generations illustrate consistency and diversity.
-          </p>
-        </article>
+              <span class="link-block">
+                <a href="https://huggingface.co/spaces/TaliDror/AAS2F"
+                   class="external-link button is-normal is-rounded is-warning"
+                   target="_blank" rel="noopener">
+                  <span class="icon"><i class="fas fa-play-circle"></i></span>
+                  <span>Demo</span>
+                </a>
+              </span>
 
-      </div>
-    </div>
-  </section>
-
-  <section id="method">
-    <div class="container">
-
-      <div class="section-header">
-        <div>
-          <span class="eyebrow">Method Figure</span>
-          <h2>Method teaser / overview</h2>
-        </div>
-      </div>
-
-      <div class="figure-card">
-        <div class="figure-frame">
-          Method teaser / overview figure
-        </div>
-
-        <p class="figure-caption">
-          Figure 1. Overview of the proposed framework.
-        </p>
-      </div>
-
-    </div>
-  </section>
-
-  <section id="demo">
-    <div class="container">
-
-      <div class="section-header">
-        <div>
-          <span class="eyebrow">Interactive Demo</span>
-
-          <h2>Try speech-to-face generation</h2>
-
-          <p class="section-text">
-            Record a short audio clip and preview where the generated face
-            will appear.
-          </p>
-        </div>
-      </div>
-
-      <div class="demo-card">
-
-        <div class="panel">
-
-          <p class="panel-label">Record Audio</p>
-
-          <div class="demo-actions">
-            <button id="recordBtn" class="btn btn-primary">
-              Start Recording
-            </button>
-
-            <button id="resetDemoBtn"
-                    class="btn btn-secondary"
-                    disabled>
-              Reset
-            </button>
-          </div>
-
-          <p id="recordStatus" class="demo-status">
-            Ready to record.
-          </p>
-
-          <audio id="recordedAudio" controls></audio>
-
-        </div>
-
-        <div class="panel">
-
-          <p class="panel-label">Generated Image</p>
-
-          <div id="generatedPreview" class="generated-preview">
-            Generated image will appear here
+            </div>
           </div>
 
         </div>
-
       </div>
-
     </div>
-  </section>
+  </div>
+</section>
 
-  <section id="examples">
-    <div class="container">
 
-      <div class="section-header">
-        <div>
-          <span class="eyebrow">Qualitative Results</span>
+<!-- ═══ TL;DR ═════════════════════════════════════════════ -->
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body" style="text-align: justify;">
+      <p class="is-size-6">
+        <strong>TL;DR:</strong> AAS2F models the one-to-many nature of voice-to-face correspondence with a speaker-conditioned diffusion model:
+      </p>
+      <p class="is-size-6" style="margin-left: 1.5rem; margin-top: 0.6rem; line-height: 2.2;">
+        🔥 Ambiguity-aware: generates diverse plausible faces for a given voice rather than a single deterministic output.<br>
+        🔥 Speaker-conditioned generation via WavLM + ECAPA-TDNN speaker embeddings projected into diffusion conditioning space.<br>
+        🔥 LoRA-finetuned Stable Diffusion backbone for high-quality, realistic face synthesis from audio.<br>
+      </p>
+    </div>
+  </div>
+</section>
 
-          <h2>Audio-image examples</h2>
 
-          <p class="section-text">
-            Each card shows one ground-truth image and three generated images.
+<!-- ═══ Abstract ══════════════════════════════════════════ -->
+<section class="section" id="abstract">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            We present AAS2F, an ambiguity-aware speech-to-face synthesis framework that explicitly models the one-to-many nature of voice-to-face correspondence. Given a speech sample, our model generates realistic face images that are consistent with the speaker's vocal identity while capturing the diversity of plausible appearances. We combine a WavLM-based speaker embedding encoder with a LoRA-finetuned Stable Diffusion pipeline, conditioning face generation on speaker identity extracted directly from audio. Unlike prior approaches that collapse to a single face per voice, AAS2F embraces the inherent ambiguity in the voice–appearance relationship, producing multiple speaker-consistent yet visually diverse outputs.
           </p>
         </div>
       </div>
-
-      <div class="toolbar">
-
-        <input id="searchInput"
-               class="input"
-               type="text"
-               placeholder="Search examples..." />
-
-        <select id="groupFilter" class="select">
-          <option value="all">All groups</option>
-        </select>
-
-      </div>
-
-      <div id="examplesGrid" class="examples-grid"></div>
-
     </div>
-  </section>
+  </div>
+</section>
 
-  <section id="citation">
-    <div class="container">
 
-      <div class="section-header">
-        <div>
-          <span class="eyebrow">Citation</span>
-          <h2>BibTeX</h2>
-        </div>
-      </div>
-
-      <div class="citation-box">
-<pre>@article{aas2f2025,
-  title   = {Ambiguity-Aware Speech-to-Face Synthesis},
-  author  = {Author One and Author Two},
-  year    = {2025}
-}</pre>
-      </div>
-
+<!-- ═══ Method ════════════════════════════════════════════ -->
+<section class="hero teaser" id="method">
+  <div class="container is-max-desktop">
+    <div class="hero-body" style="text-align: justify;">
+      <h2 class="title">Method</h2>
+      <figure class="image">
+        <img src="./assets/method.png" alt="AAS2F Method Overview" />
+      </figure>
+      <p class="has-text-centered is-size-6" style="margin-top: 1rem; color: #7a7a7a;">
+        Figure 1. Overview of the AAS2F pipeline: audio → speaker embedding → conditioned diffusion → diverse face images.
+      </p>
     </div>
-  </section>
+  </div>
+</section>
 
-</main>
+
+<!-- ═══ Demo ══════════════════════════════════════════════ -->
+<section class="section" id="demo">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Interactive Demo</h2>
+    <div class="hf-demo-box">
+      <p class="hf-demo-desc">
+        Upload a short speech sample and watch AAS2F generate a face conditioned on the speaker's voice.
+        Runs live on Hugging Face Spaces — no setup required.
+      </p>
+      <a href="https://huggingface.co/spaces/TaliDror/AAS2F"
+         class="button is-warning is-large is-rounded"
+         target="_blank" rel="noopener">
+        <span class="icon"><i class="fas fa-rocket"></i></span>
+        <span>Open on Hugging Face Spaces</span>
+      </a>
+      <div class="hf-iframe-wrap">
+        <iframe
+          src="https://talidror-aas2f.hf.space"
+          frameborder="0"
+          width="100%"
+          height="500"
+          title="AAS2F Interactive Demo">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ Results ═══════════════════════════════════════════ -->
+<section class="section" id="examples">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Qualitative Results</h2>
+    <p class="has-text-centered is-size-6" style="color: #7a7a7a; margin-bottom: 2rem;">
+      Each card shows one ground-truth face alongside three generated images conditioned on different audio clips from the same speaker.
+    </p>
+
+    <div class="examples-toolbar">
+      <input id="searchInput" type="text" placeholder="Search examples…" />
+      <select id="groupFilter">
+        <option value="all">All groups</option>
+      </select>
+    </div>
+
+    <div id="examplesGrid" class="examples-grid"></div>
+  </div>
+</section>
+
 
 <footer class="footer">
-  © 2025 AAS2F Project Page
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8 has-text-centered">
+        <p>© 2025 AAS2F Project Page</p>
+      </div>
+    </div>
+  </div>
 </footer>
 
 
-  <script>
-    const examples = [];
-    const skip = [10, 14, 18, 19, 21, 22, 23, 27, 28, 34, 39, 40, 44, 46, 51];
-    let displayIndex = 1;
-
-    for (let i = 5; i <= 55; i++) {
-      if (skip.includes(i)) continue;
-
-      const num = String(i).padStart(3, '0');
-
-      examples.push({
-        id: `identity_${num}`,
-        title: `Identity ${displayIndex}`,
-        group: "main",
-        note: "",
-        gtImage: `assets/images/identity_${num}/gt.jpg`,
-        samples: [
-          {
-            title: "Audio 1",
-            note: "",
-            audio: `assets/audio/identity_${num}/audio_1.wav`,
-            image: `assets/images/identity_${num}/gen_1.jpg`
-          },
-          {
-            title: "Audio 2",
-            note: "",
-            audio: `assets/audio/identity_${num}/audio_2.wav`,
-            image: `assets/images/identity_${num}/gen_2.jpg`
-          },
-          {
-            title: "Audio 3",
-            note: "",
-            audio: `assets/audio/identity_${num}/audio_3.wav`,
-            image: `assets/images/identity_${num}/gen_3.jpg`
-          }
-        ]
+<script>
+  // ── Navbar burger toggle ─────────────────────────────
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.navbar-burger').forEach(burger => {
+      burger.addEventListener('click', () => {
+        const menu = document.getElementById(burger.dataset.target);
+        burger.classList.toggle('is-active');
+        if (menu) menu.classList.toggle('is-active');
       });
+    });
+  });
 
-      displayIndex++;
-    }
+  // ── Build examples data ──────────────────────────────
+  const examples = [];
+  const skip = [10, 14, 18, 19, 21, 22, 23, 27, 28, 34, 39, 40, 44, 46, 51];
+  let displayIndex = 1;
 
-const grid = document.getElementById('examplesGrid');
+  for (let i = 5; i <= 55; i++) {
+    if (skip.includes(i)) continue;
+    const num = String(i).padStart(3, '0');
+    examples.push({
+      id:      `identity_${num}`,
+      title:   `Identity ${displayIndex}`,
+      group:   'main',
+      gtImage: `assets/images/identity_${num}/gt.jpg`,
+      samples: [
+        { title: 'Audio 1', audio: `assets/audio/identity_${num}/audio_1.wav`, image: `assets/images/identity_${num}/gen_1.jpg` },
+        { title: 'Audio 2', audio: `assets/audio/identity_${num}/audio_2.wav`, image: `assets/images/identity_${num}/gen_2.jpg` },
+        { title: 'Audio 3', audio: `assets/audio/identity_${num}/audio_3.wav`, image: `assets/images/identity_${num}/gen_3.jpg` }
+      ]
+    });
+    displayIndex++;
+  }
 
-function exampleMarkup(example) {
+  // ── Render ───────────────────────────────────────────
+  const grid = document.getElementById('examplesGrid');
 
-  return `
-    <article class="example-card">
-
-      <div class="example-head">
-
-        <div>
-          <h3 class="example-title">${example.title}</h3>
+  function exampleMarkup(ex) {
+    return `
+      <article class="example-card">
+        <div class="example-head">
+          <h3 class="example-card-title">${ex.title}</h3>
+          <span class="ex-badge">3 audio-image pairs</span>
         </div>
-
-        <div class="badge">
-          3 audio-image pairs
-        </div>
-
-      </div>
-
-      <div class="example-body">
-
-        <div class="panel">
-
-          <p class="panel-label">Ground Truth</p>
-
-          <img class="gt-image"
-               src="${example.gtImage}" />
-
-        </div>
-
-        <div class="panel">
-
-          <p class="panel-label">
-            Generated Images from Audio
-          </p>
-
-          <div class="results-grid">
-
-            ${example.samples.map(sample => `
-
-              <div class="sample-card">
-
-                <img class="sample-image"
-                     src="${sample.image}" />
-
-                <p class="sample-title">
-                  ${sample.title}
-                </p>
-
-                <audio controls>
-                  <source src="${sample.audio}" />
-                </audio>
-
-              </div>
-
-            `).join('')}
-
+        <div class="example-body">
+          <div class="ex-panel">
+            <p class="ex-panel-label">Ground Truth</p>
+            <img class="gt-image" src="${ex.gtImage}" alt="Ground truth for ${ex.title}" loading="lazy" />
           </div>
-
+          <div class="ex-panel">
+            <p class="ex-panel-label">Generated from Audio</p>
+            <div class="results-grid">
+              ${ex.samples.map(s => `
+                <div class="sample-card">
+                  <img class="sample-image" src="${s.image}" alt="${s.title}" loading="lazy" />
+                  <p class="sample-card-title">${s.title}</p>
+                  <audio controls><source src="${s.audio}" /></audio>
+                </div>
+              `).join('')}
+            </div>
+          </div>
         </div>
-
-      </div>
-
-    </article>
-  `;
-}
-
-function renderExamples() {
-  grid.innerHTML = examples.map(exampleMarkup).join('');
-}
-
-renderExamples();
-
-const recordBtn = document.getElementById('recordBtn');
-const resetDemoBtn = document.getElementById('resetDemoBtn');
-const recordStatus = document.getElementById('recordStatus');
-const recordedAudio = document.getElementById('recordedAudio');
-const generatedPreview = document.getElementById('generatedPreview');
-
-let mediaRecorder;
-let recordedChunks = [];
-let recordedAudioUrl;
-
-async function startRecording() {
-
-  try {
-
-    const stream = await navigator.mediaDevices.getUserMedia({
-      audio: true
-    });
-
-    recordedChunks = [];
-
-    mediaRecorder = new MediaRecorder(stream);
-
-    mediaRecorder.addEventListener('dataavailable', event => {
-      if (event.data.size > 0) {
-        recordedChunks.push(event.data);
-      }
-    });
-
-    mediaRecorder.addEventListener('stop', () => {
-
-      const audioBlob = new Blob(recordedChunks, {
-        type: 'audio/webm'
-      });
-
-      if (recordedAudioUrl) {
-        URL.revokeObjectURL(recordedAudioUrl);
-      }
-
-      recordedAudioUrl = URL.createObjectURL(audioBlob);
-
-      recordedAudio.src = recordedAudioUrl;
-      recordedAudio.style.display = 'block';
-
-      recordStatus.textContent =
-        'Recording complete. Ready for generation pipeline.';
-
-      recordBtn.textContent = 'Start Recording';
-
-      resetDemoBtn.disabled = false;
-
-      generatedPreview.innerHTML = `
-        <img src="https://placehold.co/600x600?text=Generated+Face"
-             alt="Generated Face">
-      `;
-
-      stream.getTracks().forEach(track => track.stop());
-
-      // ===================================================
-      // SEND AUDIO TO YOUR PIPELINE HERE
-      // ===================================================
-      // Example:
-      // const formData = new FormData();
-      // formData.append('audio', audioBlob);
-      //
-      // fetch('/generate', {
-      //   method: 'POST',
-      //   body: formData
-      // })
-      // .then(res => res.json())
-      // .then(data => {
-      //   generatedPreview.innerHTML =
-      //     `<img src="${data.image_url}" />`;
-      // });
-      // ===================================================
-
-    });
-
-    mediaRecorder.start();
-
-    recordBtn.textContent = 'Stop Recording';
-
-    recordStatus.textContent = 'Recording...';
-
-  } catch (error) {
-
-    recordStatus.textContent =
-      'Microphone access was blocked or unavailable.';
-  }
-}
-
-function stopRecording() {
-
-  if (
-    mediaRecorder &&
-    mediaRecorder.state === 'recording'
-  ) {
-    mediaRecorder.stop();
-  }
-}
-
-function resetDemo() {
-
-  if (recordedAudioUrl) {
-    URL.revokeObjectURL(recordedAudioUrl);
+      </article>
+    `;
   }
 
-  recordedAudio.removeAttribute('src');
-  recordedAudio.style.display = 'none';
-
-  generatedPreview.innerHTML =
-    'Generated image will appear here';
-
-  recordStatus.textContent = 'Ready to record.';
-
-  resetDemoBtn.disabled = true;
-}
-
-recordBtn.addEventListener('click', () => {
-
-  if (
-    mediaRecorder &&
-    mediaRecorder.state === 'recording'
-  ) {
-    stopRecording();
-  } else {
-    startRecording();
+  function renderExamples(list) {
+    grid.innerHTML = list.map(exampleMarkup).join('');
   }
-});
 
-resetDemoBtn.addEventListener('click', resetDemo);
+  renderExamples(examples);
 
+  // ── Search & filter ──────────────────────────────────
+  const searchInput = document.getElementById('searchInput');
+  const groupFilter = document.getElementById('groupFilter');
+
+  function filtered() {
+    const q = searchInput.value.toLowerCase().trim();
+    const g = groupFilter.value;
+    return examples.filter(e =>
+      (!q || e.title.toLowerCase().includes(q)) &&
+      (g === 'all' || e.group === g)
+    );
+  }
+
+  searchInput.addEventListener('input',  () => renderExamples(filtered()));
+  groupFilter.addEventListener('change', () => renderExamples(filtered()));
 </script>
 
 </body>
